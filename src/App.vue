@@ -7,11 +7,29 @@
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
-
+// import axios from 'axios'
+import jsonp from 'jsonp'
 export default {
   name: 'App',
   components: {
     HelloWorld
+  },
+  data() {
+    return {
+      age: 30,
+      data: ''
+    }
+  },
+  mounted() {
+    let url = '/activity/servicetime'
+    // axios.get(url).then((e) => {
+    //   console.log(e)
+    // })
+    jsonp(url,(err, res) => {
+      let result = res;
+      this.data = result
+    })
+    
   }
 }
 </script>
