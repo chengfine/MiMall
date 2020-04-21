@@ -4,8 +4,15 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import App from './App.vue'
 // import env from './env' // ./指的是当前目录，没有 ./ 他会认为这是一个依赖插件
+
+// mock 开关
+const mock = true;
+if (mock) {
+  require('./mock/api')
+}
+
 // 根据前端的跨域方式作调整   /a/b : /api/a/b => /a/b
-// axios.defaults.baseURL = '/api';
+axios.defaults.baseURL = '/api';
 axios.defaults.timeout = 8000;
 // 根据环境变量获取不同的请求地址
 // axios.defaults.baseURL = env.baseURL;
