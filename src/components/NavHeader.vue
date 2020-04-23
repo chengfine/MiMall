@@ -105,7 +105,7 @@
           <div class="item-menu">
             <span>ReaMi红米</span>
             <div class="children">
-              <!-- <ul>
+              <ul>
                 <li class="product">
                   <a href target="_blank">
                     <div class="pro-img">
@@ -178,12 +178,87 @@
                     <div class="pro-price">4999元起</div>
                   </a>
                 </li>
-              </ul> -->
+              </ul>
             </div>
           </div>
           <div class="item-menu">
             <span>电视</span>
-            <div class="children"></div>
+            <div class="children">
+              <ul>
+                <li class="product">
+                  <a href target="_blank">
+                    <div class="pro-img">
+                      <img
+                        src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/0112cb7e2ea8489fbd36ce3a781d5232.jpg?thumb=1&w=160&h=110&f=webp&q=90"
+                        alt
+                      />
+                    </div>
+                    <div class="pro-name">Redmi 智能电视 MAX 98"</div>
+                    <div class="pro-price">19999元</div>
+                  </a>
+                </li>
+                <li class="product">
+                  <a href target="_blank">
+                    <div class="pro-img">
+                      <img
+                        src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/6917267948c54c647d2009a98637aac6.jpg?thumb=1&w=160&h=110&f=webp&q=90"
+                        alt
+                      />
+                    </div>
+                    <div class="pro-name">Redmi 红米电视 70英寸</div>
+                    <div class="pro-price">3199元</div>
+                  </a>
+                </li>
+                <li class="product">
+                  <a href target="_blank">
+                    <div class="pro-img">
+                      <img
+                        src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/00f597a8725eee9245e383c35cd4f7b6.jpg?thumb=1&w=160&h=110"
+                        alt
+                      />
+                    </div>
+                    <div class="pro-name">小米壁画电视 65英寸</div>
+                    <div class="pro-price">6999元</div>
+                  </a>
+                </li>
+                <li class="product">
+                  <a href target="_blank">
+                    <div class="pro-img">
+                      <img
+                        src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/a40904b6a053b73b631a152334388d0e.jpg?thumb=1&w=160&h=110"
+                        alt
+                      />
+                    </div>
+                    <div class="pro-name">小米全面屏电视 55英寸</div>
+                    <div class="pro-price">1799元</div>
+                  </a>
+                </li>
+                <li class="product">
+                  <a href target="_blank">
+                    <div class="pro-img">
+                      <img
+                        src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/e8f4e22f6d591825f8f150b3309c750b.png?thumb=1&w=160&h=110"
+                        alt
+                      />
+                    </div>
+                    <div class="pro-name">小米电视4A 32英寸</div>
+                    <div class="pro-price">699元</div>
+                  </a>
+                </li>
+                <li class="product">
+                  <a href target="_blank">
+                    <div class="pro-img">
+                      <img
+                        src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/bf72a3e9a6e799cb71ecfa7d80465351.jpg?thumb=1&w=160&h=110"
+                        alt
+                      />
+                    </div>
+                    <div class="pro-name">小米电视4A 55英寸</div>
+                    <div class="pro-price">1699元</div>
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
         <div class="header-search">
@@ -271,13 +346,15 @@ export default {
           font-size: 16px;
           line-height: 112px;
           padding-right: 20px;
-          span {
-            cursor: pointer;
-          }
+          cursor: pointer;
+          // span {
+          //   cursor: pointer;
+          // }
           &:hover {
             color: $colorA;
             .children {
               height: 220px;
+              opacity: 1;
             }
           }
           .children {
@@ -285,9 +362,12 @@ export default {
             top: 112px;
             left: 0;
             width: 1226px;
-            height: 220px;
+            height: 0px;
+            opacity: 0;
+            overflow: hidden;
             border-top: 1px solid #e5e5e5;
             box-shadow: 0px 7px 6px 0px rgba(0, 0, 0, 0.11);
+            transition: height 0.2s;
           }
           .product {
             position: relative;
