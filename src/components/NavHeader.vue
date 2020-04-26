@@ -230,7 +230,7 @@
                       />
                     </div>
                     <div class="pro-name">小米全面屏电视 55英寸</div>
-                    <div class="pro-price">1799元</div>
+                    <div class="pro-price">1798元</div>
                   </a>
                 </li>
                 <li class="product">
