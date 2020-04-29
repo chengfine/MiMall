@@ -9,9 +9,10 @@
           <a href="javascript:;">协议规则</a>
         </div>
         <div class="topbar-user">
-          <a href="javascript:;">登录</a>
-          <a href="javascript:;">注册</a>
-          <a href="javascript:;" class="my-cart">
+          <a href="javascript:;" v-if="username">{{username}}</a>
+          <a href="javascript:;" v-if="!username" @click="login">登录</a>
+          <a href="javascript:;" v-if="username">我的订单</a>
+          <a href="javascript:;" class="my-cart" @click="goToCart">
             <span class="icon-cart"></span>购物车
           </a>
         </div>
@@ -107,15 +108,16 @@
             <div class="children">
               <ul>
                 <li class="product" v-for="(item, index) in phoneList" :key = "index">
-                  <a href target="_blank">
+                  <a :href="'/#/product/' + item.id" target="_blank">
                     <div class="pro-img">
                       <img
-                        src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/a4a76ee684e51f0ee531ef3dc7f0aeaf.png?thumb=1&w=160&h=110&f=webp&q=90"
-                        alt
+                        :src="item.mainImage"
+                        :alt="item.name"
+                        :title="item.subtitle"
                       />
                     </div>
-                    <div class="pro-name">小米10 Pro</div>
-                    <div class="pro-price">4999元起</div>
+                    <div class="pro-name">{{item.name}}</div>
+                    <div class="pro-price">{{item.price | currency}}</div>
                   </a>
                 </li>
                 
@@ -131,7 +133,8 @@
                     <div class="pro-img">
                       <img
                         :src="item.url"
-                        :alt="item.subtitle"
+                        :alt="item.name"
+                        :title="item.subtitle"
                       />
                     </div>
                     <div class="pro-name">{{item.name}}</div>
@@ -171,7 +174,7 @@ export default {
   },
   filters: {
     currency (val) {
-      if(val) return '0.00';
+      if(!val) return '0.00';
       return '¥' + val.toFixed(2) + '元';
     }
   },
@@ -179,17 +182,25 @@ export default {
     this.getProductList();
   },
   methods: {
+    login(){
+      this.$router.push('/login');
+    },
     getProductList () {
       this.axios.get('/products', {
         params: {
-          categoryId:'100012'
+          categoryId:'100012',
+          pageSize:6
         }
       }).then( (res)=> {
-        if(res.list.length > 6){
-          console.log(res);
-          this.phoneList = res.list.slice(0, 6)
-        }
+        // if(res.list.length > 6){
+        //   console.log(res);
+        //   this.phoneList = res.list.slice(0, 6)
+        // }
+        this.phoneList = res.list
       })
+    },
+    goToCart() {
+      this.$router.push('/cart');
     }
   }
 };
@@ -286,6 +297,7 @@ export default {
             border-top: 1px solid #e5e5e5;
             box-shadow: 0px 7px 6px 0px rgba(0, 0, 0, 0.11);
             transition: height 0.8s;
+            background-color: #ffffff;
           }
           .product {
             position: relative;
