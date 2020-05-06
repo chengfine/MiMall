@@ -103,22 +103,31 @@
       </div>
     </div>
     <ServiceBar></ServiceBar>
+    <Modal 
+      title="提示"
+      sureText="查看购物车" 
+      btnType="1" 
+      modalType="middle"
+      :showModal="showModal">
+      <template v-slot:body>
+        <p>商品添加成功！</p>
+      </template>  
+    </Modal>
   </div>
 </template>
 <script>
 import ServiceBar from "./../components/ServerBar";
-import { Swiper, SwiperSlide, directive } from "vue-awesome-swiper";
+import Modal from "./../components/Modal";
+import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import "swiper/css/swiper.css";
 export default {
   name: "index", // 组件名称或者页面名称
   components: {
     Swiper,
     SwiperSlide,
-    ServiceBar
+    ServiceBar,
+    Modal
   },
-  //   directives: {
-  //     swiper: directive
-  //   },
   data() {
     return {
       swiperOptions: {
@@ -211,7 +220,8 @@ export default {
           img: "/imgs/ads/ads-4.jpg"
         }
       ],
-      phoneList: []
+      phoneList: [],
+      showModal:true
     };
   },
   mounted() {

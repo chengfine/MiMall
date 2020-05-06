@@ -1,17 +1,25 @@
 <template>
-    <div class="modal">
+    <div class="modal" v-show="showModal">
+            <!-- 遮罩层 -->
         <div class="mask">
-
+           
         </div>
+            <!-- 弹框 -->
         <div class="modal-dialog">
+            
             <div class="modal-header">
-
+                <span>标题</span>
+                <a href="javascript:;" class="icon-close"></a>
             </div>
             <div class="modal-body">
+                <!-- 用插槽的方式实现动态的 -->
                 <slot name = "body"></slot>
-
             </div>
-            <div class="modal-foooter">
+            <div class="modal-footer">
+                <div class="btn-group">
+                    <a href="javascript:;" class="btn">确定</a>
+                    <a href="javascript:;" class="btn">取消</a>
+                </div>
                 
             </div>
         </div>
@@ -19,10 +27,37 @@
 </template>    
 
 <script>
+export default {
+    name: 'modal',
+    props: {
+        // 弹窗类型：小small 、中middle、大large、表单 form
+        modalType: {
+            type: String,
+            default: 'form'
+        },
+        // 弹窗标题
+        title: String,
+        // 按钮类型: 1、确定按钮    2、取消按钮     3、确定取消都有
+        btnType: String,
+        sureText: {
+            type: String,
+            default: '确定'
+        },
+        cancelText: {
+            type: String,
+            default:'取消'
+        },
+        showModal: Boolean
 
+
+    }
+}
 
 </script>      
 
 <style lang="scss">
-
+    @import './../assets/scss/config.scss';
+    @import './../assets/scss/mixin.scss';
+    @import './../assets/scss/modal.scss';
+    
 </style>
