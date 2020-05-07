@@ -32,7 +32,7 @@
                   <a href target="_blank">
                     <div class="pro-img">
                       <img
-                        src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/82ddffd7562c54f9166fa876c143ff22.png?thumb=1&w=160&h=110&f=webp&q=90"
+                        v-lazy="'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/82ddffd7562c54f9166fa876c143ff22.png?thumb=1&w=160&h=110&f=webp&q=90'"
                         alt
                       />
                     </div>
@@ -44,7 +44,7 @@
                   <a href target="_blank">
                     <div class="pro-img">
                       <img
-                        src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/82ddffd7562c54f9166fa876c143ff22.png?thumb=1&w=160&h=110&f=webp&q=90"
+                        v-lazy="'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/82ddffd7562c54f9166fa876c143ff22.png?thumb=1&w=160&h=110&f=webp&q=90'"
                         alt
                       />
                     </div>
@@ -56,7 +56,7 @@
                   <a href target="_blank">
                     <div class="pro-img">
                       <img
-                        src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/82ddffd7562c54f9166fa876c143ff22.png?thumb=1&w=160&h=110&f=webp&q=90"
+                        v-lazy="'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/82ddffd7562c54f9166fa876c143ff22.png?thumb=1&w=160&h=110&f=webp&q=90'"
                         alt
                       />
                     </div>
@@ -68,7 +68,7 @@
                   <a href target="_blank">
                     <div class="pro-img">
                       <img
-                        src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/82ddffd7562c54f9166fa876c143ff22.png?thumb=1&w=160&h=110&f=webp&q=90"
+                        v-lazy="'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/82ddffd7562c54f9166fa876c143ff22.png?thumb=1&w=160&h=110&f=webp&q=90'"
                         alt
                       />
                     </div>
@@ -80,7 +80,7 @@
                   <a href target="_blank">
                     <div class="pro-img">
                       <img
-                        src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/82ddffd7562c54f9166fa876c143ff22.png?thumb=1&w=160&h=110&f=webp&q=90"
+                        v-lazy="'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/82ddffd7562c54f9166fa876c143ff22.png?thumb=1&w=160&h=110&f=webp&q=90'"
                         alt
                       />
                     </div>
@@ -92,7 +92,7 @@
                   <a href target="_blank">
                     <div class="pro-img">
                       <img
-                        src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/82ddffd7562c54f9166fa876c143ff22.png?thumb=1&w=160&h=110&f=webp&q=90"
+                        v-lazy="'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/82ddffd7562c54f9166fa876c143ff22.png?thumb=1&w=160&h=110&f=webp&q=90'"
                         alt
                       />
                     </div>
@@ -111,7 +111,7 @@
                   <a :href="'/#/product/' + item.id" target="_blank">
                     <div class="pro-img">
                       <img
-                        :src="item.mainImage"
+                        v-lazy="item.mainImage"
                         :alt="item.name"
                         :title="item.subtitle"
                       />
@@ -132,7 +132,7 @@
                   <a :href="'/#/product/'+item.id " target="_blank">
                     <div class="pro-img">
                       <img
-                        :src="item.url"
+                        v-lazy="item.url"
                         :alt="item.name"
                         :title="item.subtitle"
                       />
