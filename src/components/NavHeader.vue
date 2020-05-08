@@ -13,7 +13,7 @@
           <a href="javascript:;" v-if="!username" @click="login">登录</a>
           <a href="javascript:;" v-if="username">我的订单</a>
           <a href="javascript:;" class="my-cart" @click="goToCart">
-            <span class="icon-cart"></span>购物车
+            <span class="icon-cart"></span>购物车({{cartCount}})
           </a>
         </div>
       </div>
@@ -156,11 +156,12 @@
   </div>
 </template>
 <script>
+import {mapState} from 'vuex';
 export default {
   name: "nav-header", // 组件名称或者页面名称
   data () {
     return {
-      username: 'IMChenng',
+      // username: this.$store.state.username,
       phoneList:[],
       tvList: [
         {id: 1, categoryId: 100012, name: "小米壁画电视 65英寸", subtitle: "小米壁画电视 65英寸", url: "https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/00f597a8725eee9245e383c35cd4f7b6.jpg?thumb=1&w=160&h=110", price: 6999},
@@ -171,6 +172,15 @@ export default {
         {id: 6, categoryId: 100012, name: "Redmi 智能电视 MAX 98'", subtitle: "Redmi 智能电视 MAX 98'", url: "https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/0112cb7e2ea8489fbd36ce3a781d5232.jpg?thumb=1&w=160&h=110&f=webp&q=90", price: 19999}
       ],
     }
+  },
+  computed:{
+    // username(){
+    //   return this.$store.state.username;
+    // },
+    // cartCount(){
+    //   return this.$store.state.cartCount;
+    // },
+    ...mapState(['username', 'cartCount'])
   },
   filters: {
     currency (val) {
@@ -228,6 +238,7 @@ export default {
         background-color: #ff6600;
         text-align: center;
         color: #ffffff;
+        margin-right: 0;
         .icon-cart {
           @include bgImg(16px, 12px, "/imgs/icon-cart-checked.png");
           margin-right: 4px;
@@ -360,7 +371,7 @@ export default {
           a {
             @include bgImg(18px, 18px, "./../../public/imgs/icon-search.png");
             margin-left: 17px;
-          }
+          }      
         }
       }
     }
