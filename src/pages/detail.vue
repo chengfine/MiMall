@@ -114,7 +114,7 @@ export default{
   @import './../assets/scss/mixin.scss';
   .detail{
     .wrapper{
-        height: 870px;
+        // height: 870px;
       .swiper{
         float:left;
         width:642px;
