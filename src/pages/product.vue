@@ -1,14 +1,14 @@
 <template>
   <div class="product">
-    <Product-param>
+    <Product-param :title="product.name">
       <template v-slot:buy>
-        <button class="btn">立即购买</button>
+        <button class="btn" @click="buy">立即购买</button>
       </template>
     </Product-param>
     <div class="content">
       <div class="item-bg">
-        <h2>小米8</h2>
-        <h3>8周年旗舰</h3>
+        <h2>{{product.name}}</h2>
+        <h3>{{product.subtitle}}</h3>
         <p>
           <a href="" id="">全球首款双频 GPS</a>
           <span>|</span>
@@ -19,46 +19,32 @@
           <a href="" id="">红外人脸识别</a>
         </p>
         <div class="price">
-          <span>¥</span><em>2599</em>
+          <span>¥</span><em>{{product.price}}</em>
         </div>
       </div>
       <div class="item-bg-2"></div>
       <div class="item-bg-3"></div>
       <div class="item-swiper">
-        <swiper :options="swiperOptions">
-          <swiper-slide>
-            <img src="/imgs/product/gallery-2.png" alt="">
-            <img src="/imgs/product/gallery-3.png" alt="">
-            <img src="/imgs/product/gallery-4.png" alt="">
-          <!-- </swiper-slide> -->
-          <!-- <swiper-slide> -->
-            <img src="/imgs/product/gallery-5.jpg" alt="">
-            <img src="/imgs/product/gallery-3.png" alt="">
-            <img src="/imgs/product/gallery-6.jpg" alt="">
-          <!-- </swiper-slide> -->
-          <!-- <swiper-slide> -->
-            <img src="/imgs/product/gallery-2.jpg" alt="">
-            <img src="/imgs/product/gallery-4.png" alt="">
-            <img src="/imgs/product/gallery-6.jpg" alt="">
-          <!-- </swiper-slide> -->
-          <!-- <swiper-slide> -->
-            <img src="/imgs/product/gallery-5.jpg" alt="">
-            <img src="/imgs/product/gallery-3.png" alt="">
-            <img src="/imgs/product/gallery-6.jpg" alt="">
-          </swiper-slide>
-          <div class="swiper-pagination" slot="pagination"></div>
+        <swiper :options="swiperOption">
+            <swiper-slide><img src="/imgs/product/gallery-2.png" alt=""></swiper-slide>
+            <swiper-slide><img src="/imgs/product/gallery-3.png" alt=""></swiper-slide>
+            <swiper-slide><img src="/imgs/product/gallery-4.png" alt=""></swiper-slide>
+            <swiper-slide><img src="/imgs/product/gallery-5.jpg" alt=""></swiper-slide>
+            <swiper-slide><img src="/imgs/product/gallery-6.jpg" alt=""></swiper-slide>
+            <!-- Optional controls -->
+            <div class="swiper-pagination"  slot="pagination"></div>
         </swiper>
-        <p class="desc">小米8 AI变焦双摄</p>
+        <p class="desc">小米8 AI变焦双摄拍摄</p>
       </div>
       <div class="item-video">
         <h2>60帧超慢动作摄影<br/>慢慢回味每一瞬间的精彩</h2>
         <p>后置960帧电影般超慢动作视频，将眨眼间的灭秒展现的淋漓尽致！ <br/> 更能AI精准分析视频内容，15个场景智能匹配背景音效</p>
-        <div class="video-bg" @click="showSlide='slideDown'"></div>
-        <div class="video-box">
-          <div class="overlay" v-if="showSlide == 'slideDown'"></div>
+        <div class="video-bg" @click="showVideo"></div>
+        <div class="video-box" v-show="showSlide">
+          <div class="overlay"></div>
           <div class="video" :class="showSlide">
-            <span class="icon-close" @click="showSlide='slideUp'"></span>
-            <video controls="controls" muted autoplay src="/imgs/product/video.mp4"></video>
+            <span class="icon-close" @click="closeVideo"></span>
+            <video controls="controls" loop autoplay :src="src"></video>
           </div>
         </div>
       </div>
@@ -77,18 +63,46 @@ export default {
   },
   data(){
     return{
-      showSlide: '',
-      swiperOptions:{
-        autoplay: true,
-        loop: true,
-        slidesPerView: 3,
-        spaceBetween:30,
-        freeMode: true,
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true
+      src:'',
+      showSlide: '', // 控制动画效果
+      product:{}, // 商品信息
+      swiperOption:{
+          autoplay:true,
+          slidesPerView:3,
+          spaceBetween: 30,
+          freeMode: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable :true,
+          }
         }
-      }
+    }
+  },
+  mounted(){
+    this.getProductInfo()
+  },
+  methods:{
+    getProductInfo(){
+      let id = this.$route.params.id;
+      this.axios.get(`/products/${id}`).then((res)=>{
+        this.product = res;
+      })
+    },
+    buy(){
+      let id = this.$route.params.id;
+      this.$router.push(`/detail/${id}`);
+    },
+    showVideo(){
+      this.showSlide = 'slideDown';
+      this.src = '/imgs/product/video.mp4';
+
+    },
+    closeVideo(){
+      this.showSlide = 'slideUp';
+      setTimeout(()=> {
+        this.showSlide='';
+        this.src = ''
+      },600)
     }
   }
 };
@@ -212,12 +226,6 @@ export default {
           height: 536px;
           z-index: 10;
           opacity: 1;
-          // 用transition写动画
-          // transition: all .6s;
-          // &.slide{
-          //   top: 50%;
-          //   opacity: 1;
-          // }
           // 动画
           &.slideDown{
             animation: slideDown .6s linear;

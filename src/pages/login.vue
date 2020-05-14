@@ -14,10 +14,10 @@
             <span class="checked">扫码登陆</span>
           </h3>
           <div class="input">
-            <input type="text" placeholder="请输入账号" v-model="username"/>
+            <input type="text" placeholder="请输入账号" v-model="username" />
           </div>
           <div class="input">
-            <input type="password" placeholder="请输入密码" v-model="password"/>
+            <input type="password" placeholder="请输入密码" v-model="password" />
           </div>
           <div class="btn-box">
             <a href="javascript:;" class="btn" @click="login">登录</a>
@@ -55,42 +55,54 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions } from "vuex";
 export default {
-    name: 'login',
-    data() {
-        return {
-            username: '',
-            password: '',
-            userId: ''
-        }
+  name: "login",
+  data() {
+    return {
+      username: "",
+      password: "",
+      userId: ""
+    };
+  },
+  methods: {
+    login() {
+      let { username, password } = this;
+      this.axios
+        .post("/user/login", {
+          username,
+          password
+        })
+        .then(res => {
+          this.$cookie.set("userId", res.id, { expires: "1M" });
+          // to-do 保存用户名  dispatch  派发 saveUserName 这个方法
+          //  this.$store.dispatch('saveUserName', res.username);
+          this.saveUserName(res.username);
+          this.$router.push("/index");
+          this.getCartCount();
+        });
     },
-    methods: {
-       login() {
-           let {username, password} = this;
-           this.axios.post('/user/login', {
-               username,
-               password
-           }).then( (res) => {
-               this.$cookie.set('userId', res.id, {expires: '1M'});
-               // to-do 保存用户名  dispatch  派发 saveUserName 这个方法
-              //  this.$store.dispatch('saveUserName', res.username);
-              this.saveUserName(res.username);
-               this.$router.push('/index');
-           })
-       },
-       ...mapActions([ 'saveUserName' ]),
-       register() {
-           this.axios.post('/user/register', {
-               username: 'admin',
-               password: 'admin',
-               email: 'admin@163.com'
-           }).then( () => {
-               alert('注册成功');
-           })
-       } 
+    ...mapActions(["saveUserName"]),
+    register() {
+      this.axios
+        .post("/user/register", {
+          username: "admin",
+          password: "admin",
+          email: "admin@163.com"
+        })
+        .then(() => {
+          alert("注册成功");
+        });
+    },
+    getCartCount() {
+      this.axios.get("/carts/products/sum").then((res = 0) => {
+        console.log("111", res);
+        // to-do 保存到vuex里面
+        this.$store.dispatch("saveCartCount", res);
+      });
     }
-}
+  }
+};
 </script>
 
 <style lang="scss">

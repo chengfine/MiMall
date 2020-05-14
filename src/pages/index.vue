@@ -245,27 +245,22 @@ export default {
           this.phoneList = [res.list.slice(0, 4), res.list.slice(4, 8)];
         });
     },
-    addCart(){
-      this.showModal = true;
-      /*this.axios.post('/carts', {
+    addCart(id){
+      //  添加到购物车
+      this.axios.post('/carts', {
         productId: id,
         selected: true
       }).then((res) => {
-        console.log(res);
+        this.showModal = true;
+        this.$store.dispatch('saveCartCount', res.cartTotalQuantity);
       }).catch( (res) => {
         this.showModal = true;
-      })*/
+      })
     },
     goToCart() {
       this.$router.push('/cart');
     }
   }
-  //   filters: {
-  //       currey(val) {
-  //           if (!val) return '0.00';
-  //             return val.toFixed(2) + '元'
-  //       }
-  //   }
 };
 </script>
 
