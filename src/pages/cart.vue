@@ -34,7 +34,14 @@
                 </div>
               </div>
               <div class="item-total">{{item.productTotalPrice}}</div>
-              <div class="item-del"></div>
+              <div class="item-del" @click="delProduct(item)"></div>
+              <Modal 
+                title="提示"
+                sureText="确认删除" 
+                cancelText="取消删除"
+                btnType = "3"
+                :showModal="showModal"
+              />
             </li>
           </ul>
         </div>
@@ -55,24 +62,28 @@
   </div>
 </template>
 <script>
-  import OrderHeader from './../components/OrderHeader'
-  import ServiceBar from './../components/ServerBar'
-  import NavFooter from './../components/NavFooter'
+  import OrderHeader from './../components/OrderHeader';
+  import ServiceBar from './../components/ServerBar';
+  import NavFooter from './../components/NavFooter';
+  import Modal from './../components/Modal';
   export default{
     name:'index',
     components:{
       OrderHeader,
       ServiceBar,
-      NavFooter
+      NavFooter,
+      Modal
     },
     data(){
       return {
-        item:'',
+        // item:'',
         list: [], // 商品列表
         allChecked: false, // 是否全选
         cartTotalPrice:0, //商品总金额
         checkNum: 0, // 选中商品数量,
-        cartTotalQuantity: 0
+        cartTotalQuantity: 0,
+        showModal: false
+
       }
     },
     mounted(){
@@ -107,15 +118,17 @@
           quantity,
           selected
         }).then((res)=>{
-          console.log(res);
-            this.renderData(res);
-        })
-      },
-      // 删除商品
-      delProduct(item){
-        this.axios.delete(`/carts/${item.productId}`).then((res)=>{
           this.renderData(res);
         })
+      },
+      // 删除购物车商品
+      delProduct(item){
+        if(window.confirm("确认删除吗?")){
+          this.axios.delete(`/carts/${item.productId}`).then((res)=>{
+          this.renderData(res);
+        })
+        }
+        
       },
       // 切换选中和非选中
       toggleAll(){
