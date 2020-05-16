@@ -139,7 +139,13 @@
       },
       // 购物车下单
       order(){
-        this.$router.push('/order/confirm');
+        let checked = this.list.every(item => !item.productSelected);
+        console.log(checked);
+        if(checked){
+          alert("请至少选择一件商品进行结算");
+        }else{
+          this.$router.push('/order/confirm');
+        }
       },
       // 公共赋值
       renderData(res){
