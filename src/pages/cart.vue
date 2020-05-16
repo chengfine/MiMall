@@ -107,6 +107,7 @@
           quantity,
           selected
         }).then((res)=>{
+          console.log(res);
             this.renderData(res);
         })
       },
