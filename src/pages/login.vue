@@ -56,6 +56,7 @@
 
 <script>
 import { mapActions } from "vuex";
+import {Message} from 'element-ui';
 export default {
   name: "login",
   data() {
@@ -86,17 +87,17 @@ export default {
     register() {
       this.axios
         .post("/user/register", {
-          username: "admin",
-          password: "admin",
-          email: "admin@163.com"
+          username: "chenng22",
+          password: "chenng22",
+          email: "chenng22@163.com"
         })
         .then(() => {
-          alert("注册成功");
+          this.$message.success("注册成功");
+          // Message.success("注册成功");
         });
     },
     getCartCount() {
       this.axios.get("/carts/products/sum").then((res = 0) => {
-        console.log("111", res);
         // to-do 保存到vuex里面
         this.$store.dispatch("saveCartCount", res);
       });

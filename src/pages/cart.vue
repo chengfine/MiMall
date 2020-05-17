@@ -102,13 +102,13 @@
         let selected = item.productSelected;
         if(type =='-'){
           if(quantity == 1){
-            alert("商品至少保留1件");
+            this.$message.warning("商品至少保留1件");
             return;
           }
           --quantity;
         }else if( type == '+'){
           if(quantity > item.productStock){
-            alert("商品不能超过库存数量");
+            this.$message.warning("商品不能超过库存数量");
           }
           ++quantity;
         }else{
@@ -125,6 +125,7 @@
       delProduct(item){
         if(window.confirm("确认删除吗?")){
           this.axios.delete(`/carts/${item.productId}`).then((res)=>{
+            this.$message.success("删除成功");
           this.renderData(res);
         })
         }
@@ -142,7 +143,7 @@
         let checked = this.list.every(item => !item.productSelected);
         console.log(checked);
         if(checked){
-          alert("请至少选择一件商品进行结算");
+          this.$message.warning("请至少选择一件商品进行结算");
         }else{
           this.$router.push('/order/confirm');
         }
