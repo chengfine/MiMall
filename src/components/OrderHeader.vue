@@ -11,6 +11,7 @@
       </div>
       <div class="username">
         <a href="javascript:;">{{username}}</a>
+        <a href="javascript:;" @click="logout" style="margin-left: 10px">退出</a>
       </div>
     </div>
   </div>
@@ -29,6 +30,11 @@ export default {
     // },
     ...mapState(['username'])
   },
+  methods:{
+    logout(){
+
+    }
+  }
 };
 </script>
 

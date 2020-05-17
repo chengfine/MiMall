@@ -75,7 +75,7 @@ export default {
           password
         })
         .then(res => {
-          this.$cookie.set("userId", res.id, { expires: "1M" });
+          this.$cookie.set("userId", res.id, { expires: "Session" });
           // to-do 保存用户名  dispatch  派发 saveUserName 这个方法
           //  this.$store.dispatch('saveUserName', res.username);
           this.saveUserName(res.username);
