@@ -83,7 +83,6 @@
         checkNum: 0, // 选中商品数量,
         cartTotalQuantity: 0,
         showModal: false
-
       }
     },
     mounted(){
@@ -150,10 +149,15 @@
       },
       // 公共赋值
       renderData(res){
+          this.checkNum = 0;
           this.list = res.cartProductVoList || [];
           this.allChecked = res.selectedAll;
           this.cartTotalPrice = res.cartTotalPrice;
-          this.checkNum = this.list.filter(item => item.productSelected).length;
+          let checkList = this.list.filter(item => item.productSelected);
+          console.log(checkList);
+          checkList.map((item)=>{
+            this.checkNum += item.quantity || 0;
+          })
           this.cartTotalQuantity = res.cartTotalQuantity;
       }
     }
