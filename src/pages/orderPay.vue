@@ -147,7 +147,7 @@
                     this.toOrderList();
                   }
                 })
-              }, 100);
+              }, 1000);
             },
             toOrderList(){
               this.$router.push('/order/list');
