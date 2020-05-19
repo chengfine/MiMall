@@ -31,12 +31,16 @@ axios.interceptors.response.use(function (response) {
     if (path != '#/index') {
       window.location.href = '/#/login';
     }
-    return Promise.reject();
+    return Promise.reject(res);
   } else {
     Message.error(res.msg);
     // this.$message.error(res.msg);
-    return Promise.reject();
+    return Promise.reject(res);
   }
+}, (error) => {
+    let res = error.response;
+    Message.error(res.data.message);
+    return Promise.reject(error);
 })
 
 Vue.use(VueAxios, axios);
