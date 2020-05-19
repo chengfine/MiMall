@@ -1,5 +1,5 @@
 module.exports = {  // 导出一个对象
-    devServer: {    // 必须是devServer
+    devServer: {    // 必须是devServer, 本地开发服务器相关的信息
         host: 'localhost',  // 主机
         port: 8095,     // 端口号
         proxy: {    // 代理
@@ -12,5 +12,10 @@ module.exports = {  // 导出一个对象
             }
         }
     },
-    // lintOnSave: false
+    // publicPath: '/app',
+    // outputDir: 'dist',
+    // indexPath: 'index.html',
+    // lintOnSave: false,
+    productionSourceMap: false
+
 }
