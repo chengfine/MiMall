@@ -6,7 +6,8 @@
       </template>
     </order-header>
     <div class="wrapper">
-      <div class="container">
+      <loading v-if="showLoading"></loading>
+      <div class="container" v-else>
         <div class="cart-box">
           <ul class="cart-item-head">
             <li class="col-1"><span class="checkbox" v-bind:class="{'checked':allChecked}" @click="toggleAll"></span>全选</li>
@@ -62,6 +63,7 @@
   </div>
 </template>
 <script>
+  import Loading from './../components/Loading';
   import OrderHeader from './../components/OrderHeader';
   import ServiceBar from './../components/ServerBar';
   import NavFooter from './../components/NavFooter';
@@ -72,7 +74,8 @@
       OrderHeader,
       ServiceBar,
       NavFooter,
-      Modal
+      Modal,
+      Loading
     },
     data(){
       return {
@@ -82,7 +85,8 @@
         cartTotalPrice:0, //商品总金额
         checkNum: 0, // 选中商品数量,
         cartTotalQuantity: 0,
-        showModal: false
+        showModal: false,
+        showLoading: true
       }
     },
     mounted(){
@@ -92,6 +96,7 @@
       // 获取购物车列表
       getCartList(){
         this.axios.get('/carts').then((res)=>{
+          this.showLoading = false;
           this.renderData(res);
         })
       },
